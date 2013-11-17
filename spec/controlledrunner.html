@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test SAP HANA Flo Runtime Remote Tests</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../browser/oflo-runtime.js"></script>
+    <script type="text/javascript">
+      require('oflo-runtime/runtime/network.js');
+    </script>
+      
+    <!--script src="../runtime/network.js"--></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="http://chaijs.com/chai.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script>
+      mocha.setup('bdd');
+    
+    </script>
+    <script src="./controlled.js"></script>
+    <script>
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      } else { 
+        mocha.checkLeaks();
+        mocha.run();               
+      }
+    </script>
+  </body>
+</html>

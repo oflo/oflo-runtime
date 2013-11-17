@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test SAP HANA Flo Runtime</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+    <style type="text/css">
+      #fixtures {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <div id="fixtures">
+      <!--iframe src="../html/component.html?core/Repeat" id="componentRepeat"></iframe-->
+      <iframe src="html/network.html" id="network"></iframe>
+    </div>
+    <script src="../browser/oflo-runtime.js"></script>
+    <script src="http://chaijs.com/chai.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script>mocha.setup('bdd');</script>
+    <script src="./component.js"></script>
+    <script src="./network.js"></script>
+    
+    <script>
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      } else {        
+        var oneLoaded = false;
+        function checkAndExecute(){
+          if(oneLoaded){
+            mocha.checkLeaks();
+            mocha.run();
+          }else{
+            oneLoaded=true;
+          }
+        };
+        child = window.open ("html/network.html",null,"width=550,height=170,0,status=0,");
+        child2 = window.open("html/component.html?core/Repeat",null,"width=550,height=170,0,status=0,");
+        child3 = window.open("controlledrunner.html",null);
+        child.addEventListener('load', function(){
+            checkAndExecute();
+        }, true);
+        child2.addEventListener('load', function(){
+            checkAndExecute();
+        }, true);
+        child3.addEventListener('load',function(){
+          var send = function(protocol, command, payload) {
+            return child3.postMessage({
+              protocol: protocol,
+              command: command,
+              payload: payload
+            }, child3.location.href);
+          };
+          send('graph', 'clear', {
+            baseDir: '/oflo-runtime'
+          });
+          send('graph', 'addnode', {
+            id: 'core/Kick_l1oy6',
+            component: 'core/Kick',
+            metadata: {}
+          });
+          send('graph', 'addnode', {
+            id: 'core/Output_lg5mn',
+            component: 'core/Output',
+            metadata: {}
+          });
+          send('graph', 'addedge', {
+            from: {
+              node: 'core/Kick_l1oy6',
+              port: 'out'
+            },
+            to: {
+              node: 'core/Output_lg5mn',
+              port: 'in'
+            }
+          });
+          send('graph', 'addinitial', {
+            from: {
+              data: 'TestRemote'
+            },
+            to: {
+              node: 'core/Kick_l1oy6',
+              port: 'data'
+            }
+          });
+          send('graph', 'addinitial', {
+            from: {
+              data: "true"
+            },
+            to: {
+              node: 'core/Kick_l1oy6',
+              port: 'in'
+            }
+          });
+          send('network', 'start', {
+            baseDir: '/hanaflo-runtime'
+          });
+        })
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "oflo-runtime",
+  "description": "Browser module for running noflo graphs loaded from the files system",
+  "author": "Mo Unewisse <moune@web.de>",
+  "version": "0.0.1",
+  "private":true,
+  "licenses": [
+    
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oflo/oflo-runtime.git"
+  },
+  "engines": {
+    "node": ">=0.6.0"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-coffee": "~0.6.6",
+    "grunt-coffeelint": "~0.0.6",
+    "chai": "~1.5.0",
+    "mocha": "~1.9.0",
+    "grunt-mocha-phantomjs": "~0.2.2",
+    "component-builder": "git://github.com/bergie/builder.js.git#patch-1",
+    "component": "~0.17.6",
+    "component-json": "~0.1.4",
+    "component-coffee": "~0.1.4",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt-exec": "~0.4.2"
+  }
+}

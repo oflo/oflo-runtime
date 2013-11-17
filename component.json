@@ -1,0 +1,25 @@
+{
+  "name": "oflo-runtime",
+  "remotes" : [
+    "http://localhost:3000"
+  ],
+  "version": "0.1.0",
+  "keywords": [
+  ],
+  "dependencies": {
+    "noflo/noflo": "*",
+    "noflo/noflo-runtime-base": "*",
+    "noflo/noflo-core": "*"
+  },
+  "scripts": [
+    "index.js",
+    "runtime/graphprovider.js",
+    "runtime/network.js"
+  ],
+  "json": [
+    "component.json"
+  ],
+  "files": [
+    "runtime/component.js"
+  ]
+}

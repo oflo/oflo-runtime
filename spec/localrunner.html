@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test SAP HANA Flo Runtime Local Tests</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+    <style type="text/css">
+      #fixtures {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <div id="fixtures">
+      <!--iframe src="../html/component.html?core/Repeat" id="componentRepeat"></iframe-->
+      <iframe src="html/network.html" id="network"></iframe>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../browser/oflo-runtime.js"></script>
+    <script src="http://chaijs.com/chai.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script>mocha.setup('bdd');</script>
+    <script src="./local.js"></script>
+    <!--script>
+    window.onload = function () {
+      var noflo = require('noflo');
+      $.getJSON("test.json",function(data){
+        noflo.graph.loadJSON(data, function (graph) {
+        graph.baseDir = '/hanaflo-runtime';
+        noflo.createNetwork(graph);
+      });
+      });        
+    };
+    </script-->
+    <script>
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      } else { 
+        mocha.checkLeaks();
+        mocha.run();               
+      }
+    </script>
+  </body>
+</html>

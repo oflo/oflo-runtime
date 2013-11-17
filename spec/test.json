@@ -1,0 +1,61 @@
+{
+  "properties": {
+    "name": "Demo",
+    "environment": {
+      "runtime": "html",
+      "src": "./preview/iframe.html",
+      "width": "600",
+      "height": "300",
+      "content": ""
+    }
+  },
+  "exports": [],
+  "groups": [],
+  "processes": {
+    "core/Kick_l1oy6": {
+      "component": "core/Kick",
+      "metadata": {
+        "x": 381,
+        "y": 184,
+        "label": "core/Kick"
+      }
+    },
+    "core/Output_lg5mn": {
+      "component": "core/Output",
+      "metadata": {
+        "x": 834,
+        "y": 171,
+        "label": "core/Output"
+      }
+    }
+  },
+  "connections": [
+    {
+      "src": {
+        "process": "core/Kick_l1oy6",
+        "port": "out"
+      },
+      "tgt": {
+        "process": "core/Output_lg5mn",
+        "port": "in"
+      },
+      "metadata": {
+        "route": 0
+      }
+    },
+    {
+      "data": "test",
+      "tgt": {
+        "process": "core/Kick_l1oy6",
+        "port": "data"
+      }
+    },
+    {
+      "data": "true",
+      "tgt": {
+        "process": "core/Kick_l1oy6",
+        "port": "in"
+      }
+    }
+  ]
+}
